@@ -98,6 +98,163 @@ function EarringMockUI({ c }: { c: typeof colorMap['purple'] }) {
   )
 }
 
+function PricenMockUI({ c: _c }: { c: typeof colorMap['amber'] }) {
+  const materials = [
+    { name: 'Cimento Portland',  unit: 'saco 50kg', p1: '4.500', p2: '4.200', p3: '4.800' },
+    { name: 'Varão Ø12 A500NR', unit: 'barra 12m',  p1: '2.100', p2: '2.350', p3: '1.980' },
+    { name: 'Tijolo Furado',     unit: 'milheiro',   p1: '18.500', p2: '17.900', p3: '19.200' },
+  ]
+  return (
+    <div className="w-full max-w-[260px] bg-slate-950 rounded-xl border border-slate-800 overflow-hidden text-[9px] font-mono shadow-xl">
+      <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-800 bg-slate-900">
+        <span className="w-2 h-2 rounded-full bg-red-500/60" />
+        <span className="w-2 h-2 rounded-full bg-yellow-500/60" />
+        <span className="w-2 h-2 rounded-full bg-amber-500/60" />
+        <span className="ml-2 text-slate-400">Pricen · Comparador</span>
+      </div>
+      {/* header row */}
+      <div className="grid grid-cols-4 gap-px px-2 pt-2 pb-1 text-[8px] text-slate-500">
+        <span>Material</span>
+        <span className="text-center">Forn. A</span>
+        <span className="text-center">Forn. B</span>
+        <span className="text-center">Forn. C</span>
+      </div>
+      <div className="px-1 pb-2 space-y-1">
+        {materials.map(({ name, unit, p1, p2, p3 }, i) => {
+          const prices = [p1, p2, p3].map(Number)
+          const min = Math.min(...prices)
+          return (
+            <div key={i} className="grid grid-cols-4 gap-px bg-slate-900 rounded-md px-1.5 py-1.5 items-center">
+              <div>
+                <div className="text-slate-300 font-medium leading-tight">{name}</div>
+                <div className="text-slate-600 text-[7px]">{unit}</div>
+              </div>
+              {[p1, p2, p3].map((p, j) => (
+                <div key={j} className={`text-center font-bold rounded px-0.5 py-0.5 ${
+                  Number(p) === min ? 'text-amber-400 bg-amber-950/50' : 'text-slate-400'
+                }`}>
+                  {p} Kz
+                </div>
+              ))}
+            </div>
+          )
+        })}
+      </div>
+      <div className="mx-2 mb-2 bg-amber-950/30 border border-amber-900/40 rounded-lg p-2 flex items-center justify-between">
+        <span className="text-amber-400">Total estimado</span>
+        <span className="text-amber-300 font-bold">1.234.500 Kz</span>
+      </div>
+    </div>
+  )
+}
+
+function JerryMockUI({ c: _c }: { c: typeof colorMap['blue'] }) {
+  const quests = [
+    { name: 'Leitura diária',  xp: 50,  done: true },
+    { name: 'Exercício físico', xp: 80, done: true },
+    { name: 'Projeto pessoal', xp: 120, done: false },
+  ]
+  return (
+    <div className="w-full max-w-[240px] bg-slate-950 rounded-xl border border-slate-800 overflow-hidden text-[9px] font-mono shadow-xl">
+      <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-800 bg-slate-900">
+        <span className="w-2 h-2 rounded-full bg-red-500/60" />
+        <span className="w-2 h-2 rounded-full bg-yellow-500/60" />
+        <span className="w-2 h-2 rounded-full bg-cyan-500/60" />
+        <span className="ml-2 text-slate-400">Jerry · Modo RPG</span>
+        <span className="ml-auto text-cyan-400 text-[7px] border border-cyan-800/50 bg-cyan-950/50 px-1.5 py-0.5 rounded-full">Lvl 12</span>
+      </div>
+      {/* HP + XP bars */}
+      <div className="p-2 space-y-1.5">
+        <div>
+          <div className="flex justify-between text-[8px] mb-0.5">
+            <span className="text-red-400">❤️ HP</span><span className="text-slate-500">78 / 100</span>
+          </div>
+          <div className="h-2 bg-red-950 rounded-full overflow-hidden">
+            <div className="h-full bg-red-500 rounded-full" style={{ width: '78%' }} />
+          </div>
+        </div>
+        <div>
+          <div className="flex justify-between text-[8px] mb-0.5">
+            <span className="text-cyan-400">⚡ XP</span><span className="text-slate-500">2.340 / 3.000</span>
+          </div>
+          <div className="h-2 bg-cyan-950 rounded-full overflow-hidden">
+            <div className="h-full bg-cyan-500 rounded-full" style={{ width: '78%' }} />
+          </div>
+        </div>
+        <div className="flex items-center gap-2 text-[8px] pt-0.5">
+          <span className="text-orange-400">🔥 Streak: <span className="font-bold text-orange-300">14 dias</span></span>
+          <span className="text-slate-600">|</span>
+          <span className="text-violet-400">🛡 Escudos: <span className="font-bold">2</span></span>
+        </div>
+      </div>
+      {/* Quests */}
+      <div className="px-2 pb-2">
+        <div className="text-slate-500 text-[7px] uppercase tracking-wider mb-1">Missões de hoje</div>
+        {quests.map(({ name, xp, done }) => (
+          <div key={name} className={`flex items-center gap-2 py-1 px-2 rounded-md mb-1 ${done ? 'bg-cyan-950/30' : 'bg-slate-900'}`}>
+            <span className={`w-3 h-3 rounded border flex-shrink-0 flex items-center justify-center text-[8px] ${done ? 'border-cyan-500 bg-cyan-500/20 text-cyan-400' : 'border-slate-700'}`}>
+              {done ? '✓' : ''}
+            </span>
+            <span className={`flex-1 ${done ? 'text-slate-500 line-through' : 'text-slate-300'}`}>{name}</span>
+            <span className="text-cyan-400 text-[7px]">+{xp}xp</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function MyTubeMockUI({ c: _c }: { c: typeof colorMap['purple'] }) {
+  return (
+    <div className="w-[140px] bg-slate-950 rounded-xl border border-slate-800 overflow-hidden text-[9px] font-mono shadow-xl relative" style={{ height: 220 }}>
+      {/* status bar */}
+      <div className="flex items-center justify-between px-2 py-1 bg-black text-[7px] text-slate-400">
+        <span>9:41</span><span>●●● WiFi</span>
+      </div>
+      {/* video area */}
+      <div className="relative bg-gradient-to-b from-slate-800 to-slate-900" style={{ height: 140 }}>
+        {/* play icon */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+            <div className="w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[12px] border-l-white ml-1" />
+          </div>
+        </div>
+        {/* right side actions */}
+        <div className="absolute right-1.5 bottom-2 flex flex-col items-center gap-2.5">
+          <div className="flex flex-col items-center">
+            <div className="w-6 h-6 rounded-full bg-slate-700 border border-violet-500/50 flex items-center justify-center text-[8px]">🎬</div>
+          </div>
+          {[['♥','1.2k'],['💬','89'],['↗','34']].map(([icon, count]) => (
+            <div key={icon} className="flex flex-col items-center">
+              <span className="text-base leading-none">{icon}</span>
+              <span className="text-white text-[7px]">{count}</span>
+            </div>
+          ))}
+        </div>
+        {/* bottom info */}
+        <div className="absolute left-2 bottom-2 right-10">
+          <div className="text-white text-[8px] font-bold">@criador_top</div>
+          <div className="text-slate-300 text-[7px] truncate">Vídeo incrível #trending</div>
+        </div>
+        {/* progress bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-slate-700">
+          <div className="h-full bg-violet-500 w-2/5" />
+        </div>
+      </div>
+      {/* bottom nav */}
+      <div className="flex items-center justify-around px-1 py-1.5 bg-black border-t border-slate-800">
+        {['🏠','🔍','➕','🔔','👤'].map((icon, i) => (
+          <span key={i} className={`text-sm ${i === 0 ? 'text-white' : 'text-slate-600'}`}>{icon}</span>
+        ))}
+      </div>
+      {/* chat badge */}
+      <div className="absolute top-8 left-1.5 bg-violet-600/90 text-white text-[7px] px-1 py-0.5 rounded-full">
+        Chat Live
+      </div>
+    </div>
+  )
+}
+
 interface Props {
   project: Project
   index: number
@@ -124,7 +281,10 @@ export function ProjectCard({ project, index, inView, onPreview }: Props) {
           <div className="absolute inset-0 pointer-events-none"
             style={{
               backgroundImage: `radial-gradient(ellipse at center, ${
-                project.color === 'green' ? 'rgba(34,197,94,0.07)' : 'rgba(139,92,246,0.07)'
+                project.color === 'green'  ? 'rgba(34,197,94,0.07)'  :
+                project.color === 'purple' ? 'rgba(139,92,246,0.07)' :
+                project.color === 'blue'   ? 'rgba(6,182,212,0.07)'  :
+                                             'rgba(245,158,11,0.07)'
               } 0%, transparent 70%)`,
             }}
           />
@@ -136,10 +296,11 @@ export function ProjectCard({ project, index, inView, onPreview }: Props) {
             }}
           />
           <div className="relative z-10 animate-float" style={{ animationDelay: `${index * 1.5}s` }}>
-            {project.id === 'a2ie'
-              ? <ExpenseMockUI c={c} />
-              : <EarringMockUI c={c} />
-            }
+            {project.id === 'a2ie'    ? <ExpenseMockUI c={c} />
+            : project.id === 'ring2'  ? <EarringMockUI c={c} />
+            : project.id === 'pricen' ? <PricenMockUI c={c} />
+            : project.id === 'jerry'  ? <JerryMockUI c={c} />
+            :                           <MyTubeMockUI c={c} />}
           </div>
         </div>
 
