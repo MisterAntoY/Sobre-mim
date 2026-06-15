@@ -1,4 +1,4 @@
-import { CheckCircle2, Calendar, Tag } from 'lucide-react'
+import { CheckCircle2, Calendar, Tag, Eye } from 'lucide-react'
 import type { Project } from '@/data/projects'
 
 const colorMap = {
@@ -102,9 +102,10 @@ interface Props {
   project: Project
   index: number
   inView: boolean
+  onPreview: () => void
 }
 
-export function ProjectCard({ project, index, inView }: Props) {
+export function ProjectCard({ project, index, inView, onPreview }: Props) {
   const c = colorMap[project.color]
   const isEven = index % 2 === 0
 
@@ -187,6 +188,16 @@ export function ProjectCard({ project, index, inView }: Props) {
               ))}
             </div>
           </div>
+
+          {/* Preview button */}
+          <button
+            onClick={onPreview}
+            className={`self-start inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold
+              border ${c.badge} transition-all duration-200 hover:opacity-80 hover:scale-[1.02]`}
+          >
+            <Eye size={14} />
+            Ver pré-visualização
+          </button>
         </div>
       </div>
     </article>

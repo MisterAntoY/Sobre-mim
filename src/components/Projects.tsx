@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import { projects } from '@/data/projects'
+import type { Project } from '@/data/projects'
 import { ProjectCard } from '@/components/ProjectCard'
+import { ProjectPreviewModal } from '@/components/ProjectPreviewModal'
 import { useInView } from '@/hooks/useInView'
 
 export function Projects() {
   const { ref, inView } = useInView(0.05)
+  const [preview, setPreview] = useState<Project | null>(null)
 
   return (
     <section
@@ -11,7 +15,6 @@ export function Projects() {
       ref={ref as React.RefObject<HTMLElement>}
       className="py-24 px-6 relative"
     >
-      {/* subtle bg */}
       <div className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.04) 0%, transparent 50%)',
@@ -19,7 +22,6 @@ export function Projects() {
       />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Header */}
         <div
           className={`text-center mb-16 transition-all duration-700 ${
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -36,13 +38,20 @@ export function Projects() {
           </p>
         </div>
 
-        {/* Cards */}
         <div className="flex flex-col gap-8">
           {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} inView={inView} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+              inView={inView}
+              onPreview={() => setPreview(project)}
+            />
           ))}
         </div>
       </div>
+
+      <ProjectPreviewModal project={preview} onClose={() => setPreview(null)} />
     </section>
   )
 }
