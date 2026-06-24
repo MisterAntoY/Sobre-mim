@@ -1,5 +1,6 @@
 import { Mail, Github, Linkedin, MessageSquare, ArrowRight, Phone, Send } from 'lucide-react'
 import { useInView } from '@/hooks/useInView'
+import { ContactForm } from '@/components/ContactForm'
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -160,6 +161,14 @@ export function Contact() {
               </a>
             ))}
           </div>
+        </div>
+
+        <div
+          className={`mt-8 transition-all duration-700 delay-300 ${
+            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <ContactForm />
         </div>
       </div>
     </section>

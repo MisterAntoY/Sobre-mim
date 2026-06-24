@@ -3,3 +3,19 @@ dist/
 .env
 .env.local
 *.tsbuildinfo
+
+# Capacitor / Android
+android/.gradle/
+android/build/
+android/app/build/
+android/app/release/
+android/local.properties
+android/.idea/
+android/captures/
+android/.cxx/
+android/app/.cxx/
+android/keystore.properties
+android/app/*.keystore
+android/app/*.jks
+*.apk
+*.aab

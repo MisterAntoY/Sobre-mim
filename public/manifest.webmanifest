@@ -1,0 +1,39 @@
+{
+  "name": "Isidro Mendes — Portfolio",
+  "short_name": "IM Portfolio",
+  "description": "Portfolio de Isidro Mendes — Frontend Developer em React + TypeScript.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "lang": "pt",
+  "scope": "/",
+  "categories": ["portfolio", "productivity", "developer"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Projetos",
+      "url": "/#projetos",
+      "description": "Ver lista de projetos"
+    },
+    {
+      "name": "Contacto",
+      "url": "/#contacto",
+      "description": "Enviar mensagem"
+    }
+  ]
+}
