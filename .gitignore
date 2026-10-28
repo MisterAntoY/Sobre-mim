@@ -19,3 +19,5 @@ android/app/*.keystore
 android/app/*.jks
 *.apk
 *.aab
+# Cache interno do Graphify
+graphify-out/cache/
